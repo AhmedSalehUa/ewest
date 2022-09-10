@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/ic_messages_wave" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_layout"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contact_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            app:boxBackgroundColor="#fff"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:padding="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="#e5e5e5"
+            app:endIconMode="clear_text"
+            app:startIconContentDescription="Search"
+            app:startIconDrawable="@drawable/ic_baseline_search_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ListView
+            android:id="@+id/contact_list"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/messages_contact_layout"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_baseline_message_24_white" />
+</RelativeLayout>

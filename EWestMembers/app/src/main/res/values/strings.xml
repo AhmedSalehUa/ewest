@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">E West Members</string>
+    <string name="nav_bot_fixed">زيارات الصيانة</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_bot_messages">الرسائل</string>
+    <string name="LoginActivityLabel">E-West Member</string>
+    <string name="MainActivityLabel">Home</string>
+    <string name="LoginUserName">E-Mail Adress</string>
+    <string name="LoginPassword">Password</string>
+    <string name="LoginKeepSiging">Keep me signing in</string>
+    <string name="nav_bot_Attendance">الحضور والانصراف</string>
+    <string name="nav_left_Messages">الرسائل</string>
+    <string name="nav_left_Home">الرئيسية</string>
+    <string name="message_messageHint">Message</string>
+    <string name="back_button">BACK</string>
+</resources>

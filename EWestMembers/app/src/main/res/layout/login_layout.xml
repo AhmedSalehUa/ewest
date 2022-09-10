@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="@drawable/ic_wave" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_extrabold"
+        android:letterSpacing="0.2"
+        android:text="@string/LoginActivityLabel"
+        android:textColor="#fff"
+        android:textSize="28sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/LoginUserName"
+            app:boxBackgroundColor="#fff"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            android:background="@drawable/login_shape"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxStrokeWidth="0dp"
+            android:padding="5dp"
+            android:layout_margin="20dp"
+            app:endIconMode="clear_text"
+            app:startIconContentDescription="@string/LoginUserName"
+            app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/LoginPassword"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxBackgroundColor="#fff"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            android:background="@drawable/login_shape"
+            app:boxStrokeWidth="0dp"
+            android:padding="5dp"
+            android:layout_margin="20dp"
+            app:endIconMode="password_toggle"
+            app:startIconContentDescription="@string/LoginPassword"
+            app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/login_keep_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/LoginKeepSiging" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:layout_margin="20dp"
+            android:text="Login" />
+    </LinearLayout>
+</RelativeLayout>
