@@ -15,6 +15,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 
+import com.example.ewestmembers.R;
+
 import java.util.Random;
 
 public class NotificationHelper extends ContextWrapper {
@@ -43,24 +45,24 @@ public class NotificationHelper extends ContextWrapper {
         manager.createNotificationChannel(notificationChannel);
     }
 
-//    public void sendHighPriorityNotification(String title, String body, Class activityName) {
-//
-//        Intent intent = new Intent(this, activityName);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 267, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-////                .setContentTitle(title)
-////                .setContentText(body)
-//                .setSmallIcon(R.drawable.ic_launcher_background)
-//                .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                .setStyle(new NotificationCompat.BigTextStyle().setSummaryText("summary").setBigContentTitle(title).bigText(body))
-//                .setContentIntent(pendingIntent)
-//                .setAutoCancel(true)
-//                .build();
-//
-//        NotificationManagerCompat.from(this).notify(new Random().nextInt(), notification);
-//
-//
-//    }
+    public void sendHighPriorityNotification(String title, String body, Class activityName) {
+
+        Intent intent = new Intent(this, activityName);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 267, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setContentTitle(title)
+//                .setContentText(body)
+                .setSmallIcon(R.drawable.logo)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setStyle(new NotificationCompat.BigTextStyle().setSummaryText("summary").setBigContentTitle(title).bigText(body))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManagerCompat.from(this).notify(new Random().nextInt(), notification);
+
+
+    }
 
 }

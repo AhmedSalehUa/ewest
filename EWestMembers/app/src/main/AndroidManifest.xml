@@ -27,11 +27,14 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        tools:replace="android:icon"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EWestMembers"
+        android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="31">
-
+        <activity android:name="com.yongchun.library.view.ImageSelectorActivity"/>
+        <activity android:name="com.yongchun.library.view.ImagePreviewActivity"/>
+        <activity android:name="com.yongchun.library.view.ImageCropActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true"

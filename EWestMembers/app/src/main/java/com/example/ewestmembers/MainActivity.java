@@ -1,33 +1,52 @@
 package com.example.ewestmembers;
 
-import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.ewestmembers.ManiActivites.Attendance.AttendanceFragment;
-import com.example.ewestmembers.ManiActivites.Maintaince.MaintainceFragment;
+import com.example.ewestmembers.ManiActivites.MainActivityFragment;
+import com.example.ewestmembers.ManiActivites.Menu.CenteredTextFragment;
+import com.example.ewestmembers.ManiActivites.Menu.DrawerAdapter;
+import com.example.ewestmembers.ManiActivites.Menu.DrawerItem;
+import com.example.ewestmembers.ManiActivites.Menu.SimpleItem;
 import com.example.ewestmembers.SideActivites.Messeges.MessagesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.yarolegovich.slidingrootnav.SlidingRootNav;
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    NavigationView leftView;
-    BottomNavigationView bottomNav;
-    DrawerLayout drawer;
+import net.steamcrafted.materialiconlib.MaterialIconView;
+
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener{
+
+
+    private static final int POS_HOME = 0;
+    private static final int POS_MESSAGES = 1;
+    private String[] screenTitles;
+    private Drawable[] screenIcons;
+    private SlidingRootNav slidingRootNav;
 
 
     int BottomMargin; // margin fragments above bottom nav
@@ -35,67 +54,118 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_vew);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        slidingRootNav = new SlidingRootNavBuilder(this)
+                .withToolbarMenuToggle(toolbar)
+                .withMenuOpened(false)
+                .withContentClickableWhenMenuOpened(false)
+                .withSavedState(savedInstanceState)
+                .withMenuLayout(R.layout.lest_nav)
+                .inject();
+
+        screenIcons = loadScreenIcons();
+        screenTitles = loadScreenTitles();
+
+        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
+                createItemFor(POS_HOME).setChecked(true),
+                createItemFor(POS_MESSAGES)));
+        adapter.setListener(this);
+
+        RecyclerView list = findViewById(R.id.list);
+        list.setNestedScrollingEnabled(false);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(adapter);
+
+        adapter.setSelected(POS_HOME);
         //checking api url saved correctly
         SharedPreferences sharedPreferences = this.getSharedPreferences("MainActivity", MODE_PRIVATE);
         if (sharedPreferences.getString("API", "no").equals("no")) {
             sharedPreferences.edit().putString("API", "http://41.178.166.108/ewest/api/");
             sharedPreferences.edit().commit();
         }
+        ImageView userImage = findViewById(R.id.username_image_view);
 
-        //config left Navigations
-        FrameLayout framaeLayouat = (FrameLayout) findViewById(R.id.fragment_container);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
-        leftView = findViewById(R.id.nav_view);
-        leftView.setNavigationItemSelectedListener(this);
-
-        //config Drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState();
-
-        //config bottomNavigations
-        bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        TextView userName =findViewById(R.id.username_view);
+        userName.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_bot_Attendance:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AttendanceFragment()).commit();
-                        break;
-
-                    case R.id.nav_bot_fixed:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MaintainceFragment()).commit();
-                        break;
-                }
-                return true;
+            public void onClick(View v) {
+                Log.e("a","aa");
             }
         });
-        bottomNav.setVisibility(View.VISIBLE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AttendanceFragment()).commit();
 
-
-        //customizing back press
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+        MaterialIconView logOut=findViewById(R.id.logoutBtn);
+        logOut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void handleOnBackPressed() {
-
-                if (bottomNav.getSelectedItemId() != R.id.nav_bot_Attendance) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AttendanceFragment()).commit();
-                    bottomNav.setSelectedItemId(R.id.nav_bot_Attendance);
-                } else if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+            public void onClick(View v) {
+                loggingOut();
             }
-        };
-        this.getOnBackPressedDispatcher().addCallback(this, callback);
+        });
+        TextView logOutText =findViewById(R.id.logoutText);
+        logOutText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loggingOut();
+            }
+        });
+    }
+    void loggingOut(){
+        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+
+    }
+    @Override
+    public void onItemSelected(int position) {
+        if(position == POS_MESSAGES){
+            Fragment selectedScreen = new MessagesFragment();
+            showFragment(selectedScreen);
+            getSupportActionBar().setTitle("Messages");
+        }else if(position == POS_HOME){
+            Fragment selectedScreen = new MainActivityFragment();
+            showFragment(selectedScreen);
+
+            getSupportActionBar().setTitle("Home");
+        }
+        slidingRootNav.closeMenu();
+    }
+
+    private void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    @SuppressWarnings("rawtypes")
+    private DrawerItem createItemFor(int position) {
+        return new SimpleItem(screenIcons[position], screenTitles[position])
+                .withIconTint(color(R.color.gray))
+                .withTextTint(color(R.color.gray))
+                .withSelectedIconTint(color(R.color.colorPrimary))
+                .withSelectedTextTint(color(R.color.colorPrimary));
+    }
+
+    private String[] loadScreenTitles() {
+        return getResources().getStringArray(R.array.ld_activityScreenTitles);
+    }
+
+    private Drawable[] loadScreenIcons() {
+        TypedArray ta = getResources().obtainTypedArray(R.array.ld_activityScreenIcons);
+        Drawable[] icons = new Drawable[ta.length()];
+        for (int i = 0; i < ta.length(); i++) {
+            int id = ta.getResourceId(i, 0);
+            if (id != 0) {
+                icons[i] = ContextCompat.getDrawable(this, id);
+            }
+        }
+        ta.recycle();
+        return icons;
+    }
+
+    @ColorInt
+    private int color(@ColorRes int res) {
+        return ContextCompat.getColor(this, res);
     }
 
     @Override
@@ -113,28 +183,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return sharedPreferences.getString("API", "http://41.178.166.108/ewest/api/");
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_left_Home:
-                FrameLayout framaeLayouat = (FrameLayout) findViewById(R.id.fragment_container);
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) framaeLayouat.getLayoutParams();
-                params.setMargins(0, 0, 0, BottomMargin);
-                framaeLayouat.setLayoutParams(params);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AttendanceFragment()).commit();
-                bottomNav.setVisibility(View.VISIBLE);
-                bottomNav.setSelectedItemId(R.id.nav_bot_Attendance);
-                getSupportActionBar().show();
-                break;
-            case R.id.nav_left_Messages:
-                FrameLayout framaeLayout = (FrameLayout) findViewById(R.id.fragment_container);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment(framaeLayout)).commit();
-                bottomNav.setVisibility(View.INVISIBLE);
-                getSupportActionBar().hide();
-                break;
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

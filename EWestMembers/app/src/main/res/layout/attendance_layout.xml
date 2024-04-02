@@ -1,10 +1,338 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Attendance"
-    android:layout_centerInParent="true"/>
-</RelativeLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/attendance_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/topContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/att_background"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/attendText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Attending today"
+                android:textColor="#343a40"
+                android:textSize="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/attendanced"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/attendText"
+                android:visibility="visible">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/dateIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="center"
+                    app:materialIcon="calendar_today"
+                    app:materialIconColor="@color/colorPrimary"
+                    app:materialIconSize="24dp" />
+
+                <TextView
+                    android:id="@+id/today_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@id/dateIcon"
+                    android:fontFamily="@font/poppins_extrabold"
+                    android:gravity="center|left"
+                    android:text="2022 - 09 - 11"
+                    android:textColor="@color/dark_text" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/dateIcon"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="center"
+                    app:materialIcon="timelapse"
+                    app:materialIconColor="@color/colorPrimary"
+                    app:materialIconSize="24dp" />
+
+                <TextView
+                    android:id="@+id/shiftTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/today_date"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@id/schedule"
+                    android:fontFamily="@font/poppins_extrabold"
+                    android:gravity="center|left"
+                    android:text="Att : 08:15 AM Lev : 02:30 PM"
+                    android:textColor="@color/dark_text" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/empAttLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/topContainer"
+            android:background="@drawable/att_back_top"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/empAttContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Your Attendance"
+                android:textColor="#343a40"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/empAtt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/empAttContainer"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="left"
+                android:text="Att : "
+                android:textSize="12dp" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/att"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/empAtt"
+                android:layout_marginBottom="10dp"
+                android:scaleType="center"
+                app:materialIcon="run"
+                app:materialIconColor="@color/colorPrimary"
+                app:materialIconSize="24dp" />
+
+            <TextView
+                android:id="@+id/attTime"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/empAtt"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/att"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center|left"
+                android:text="8:45 AM"
+                android:textColor="@color/dark_text" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/late"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/att"
+                android:layout_marginBottom="10dp"
+                android:scaleType="center"
+                app:materialIcon="hotel"
+                app:materialIconColor="@color/colorPrimary"
+                app:materialIconSize="24dp" />
+
+            <TextView
+                android:id="@+id/attLate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/att"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/late"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center|left"
+                android:text="10 Min After the allowed period"
+                android:textColor="@color/dark_text" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/empLeaveLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/empAttLayout"
+            android:background="@drawable/att_back_bottom"
+            android:padding="20dp">
+
+
+            <TextView
+                android:id="@+id/empLev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="left"
+                android:text="Lev : "
+                android:textSize="12dp" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/Lev"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/empLev"
+                android:layout_marginBottom="10dp"
+                android:scaleType="center"
+                app:materialIcon="logout"
+                app:materialIconColor="@color/colorPrimary"
+                app:materialIconSize="24dp" />
+
+            <TextView
+                android:id="@+id/LevTime"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/empLev"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/Lev"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center|left"
+                android:text="02:20 PM"
+                android:textColor="@color/dark_text" />
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/LevEarlyIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/Lev"
+                android:layout_marginBottom="10dp"
+                android:scaleType="center"
+                app:materialIcon="run_fast"
+                app:materialIconColor="@color/colorPrimary"
+                app:materialIconSize="24dp" />
+
+            <TextView
+                android:id="@+id/LevEarly"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/LevTime"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/LevEarlyIcon"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center|left"
+                android:text="10 Min Before the allowed period"
+                android:textColor="@color/dark_text" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/askForHoliday"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="#28a745"
+                android:fontFamily="@font/kufi_semibold"
+                android:text="طلب اجازة"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/askForEarlyLeaving"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="#343a40"
+                android:fontFamily="@font/kufi_semibold"
+                android:text="مغادرة بأذن"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/holiday"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topContainer"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/holidayReason"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="40dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="center"
+            android:text="Holiday !!" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pngwing" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/leaving_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="bottom|center"
+            android:text="You Are Leaving Work Area "
+            android:textSize="24dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.mut_jaeryo.circletimer.CircleTimer
+                android:id="@+id/timmer_to_leave"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                app:isOutline="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:show_text="true"></com.mut_jaeryo.circletimer.CircleTimer>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/leftViewLeaveTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="top|center"
+            android:text="Time to set Leaving Time"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</LinearLayout>

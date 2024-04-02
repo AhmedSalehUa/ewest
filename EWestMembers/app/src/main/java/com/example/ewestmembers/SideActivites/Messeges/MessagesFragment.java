@@ -30,13 +30,9 @@ public class MessagesFragment extends Fragment {
 
     MessageContactAdapter adapter;
 
-    public MessagesFragment(FrameLayout frameLayout) {
+    public MessagesFragment( ) {
 
         super();
-        this.frameLayout = frameLayout;
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) frameLayout.getLayoutParams();
-        params.setMargins(0, 0, 0, 0);
-        frameLayout.setLayoutParams(params);
     }
 
     @Nullable
@@ -61,7 +57,7 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MessageContact item = adapter.getItem(i);
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChattingFragment(item.getName(),frameLayout,item.getPhotoUrl())).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.container, new ChattingFragment(item.getName(),frameLayout,item.getPhotoUrl())).commit();
 
             }
         });

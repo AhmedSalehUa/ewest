@@ -34,7 +34,9 @@ import androidx.fragment.app.Fragment;
 import com.example.ewestmembers.MainActivity;
 import com.example.ewestmembers.R;
 import com.example.ewestmembers.SideActivites.Messeges.MessagesFragment;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yongchun.library.view.ImageSelectorActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -79,7 +81,7 @@ public class ChattingFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment(frameLayout)).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();
             }
         });
         // setup list and adapter with dummyData
@@ -110,7 +112,7 @@ public class ChattingFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
 
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment(frameLayout)).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.container, new MessagesFragment()).commit();
 
             }
         };
@@ -179,7 +181,13 @@ public class ChattingFragment extends Fragment {
 
         animation = root.findViewById(R.id.recordAnimation);
         recordTimer = root.findViewById(R.id.recordTimer);
-
+        FloatingActionButton pickImage    = root.findViewById(R.id.message_send_image);
+        pickImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageSelectorActivity.start(getActivity(), 5, 1, true,true,true);
+            }
+        });
         setUpAdapter();
         TextView name = root.findViewById(R.id.username);
         name.setText(USERNAME);

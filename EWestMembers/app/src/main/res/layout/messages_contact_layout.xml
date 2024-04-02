@@ -12,13 +12,13 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/messageContactImage"
-            android:scaleType="fitCenter"
             android:layout_width="60dp"
-            app:strokeColor="@null"
             android:layout_height="60dp"
             android:layout_centerInParent="true"
+            android:scaleType="fitCenter"
             android:src="@color/colorPrimary"
-            app:shapeAppearanceOverlay="@style/circule" />
+            app:shapeAppearanceOverlay="@style/circule"
+            app:strokeColor="@null" />
 
     </RelativeLayout>
 
@@ -38,7 +38,6 @@
             android:layout_gravity="bottom"
             android:fontFamily="@font/poppins_bold"
             android:paddingHorizontal="10dp"
-            android:text="Jennifer Fritz"
             android:textColor="#000" />
 
         <TextView
@@ -46,8 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:paddingHorizontal="10dp"
-            android:text="Lorem Lorem Lorem Lorem Lorem Lorem " />
+            android:paddingHorizontal="10dp"  />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="3:15 PM"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -72,7 +69,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:paddingVertical="10dp"
-            android:text="24/08/2022"
             android:textAlignment="center"
             android:textSize="10sp" />
     </LinearLayout>
